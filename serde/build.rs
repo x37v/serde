@@ -97,7 +97,7 @@ fn main() {
     // Support for #[cfg(target_has_atomic = "...")] stabilized in Rust 1.60.
     if minor < 60 {
         println!("cargo:rustc-cfg=no_target_has_atomic");
-        // Allowlist of archs that support std::sync::atomic module. This is
+        // Allowlist of archs that support core::sync::atomic module. This is
         // based on rustc's compiler/rustc_target/src/spec/*.rs.
         let has_atomic64 = target.starts_with("x86_64")
             || target.starts_with("i686")
@@ -108,10 +108,10 @@ fn main() {
             || target.starts_with("riscv64");
         let has_atomic32 = has_atomic64 || emscripten;
         if minor < 34 || !has_atomic64 {
-            println!("cargo:rustc-cfg=no_std_atomic64");
+            println!("cargo:rustc-cfg=no_atomic64");
         }
         if minor < 34 || !has_atomic32 {
-            println!("cargo:rustc-cfg=no_std_atomic");
+            println!("cargo:rustc-cfg=no_atomic");
         }
     }
 }

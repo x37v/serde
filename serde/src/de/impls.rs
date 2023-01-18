@@ -2660,7 +2660,7 @@ where
     }
 }
 
-#[cfg(all(feature = "std", not(no_std_atomic)))]
+#[cfg(not(no_atomic))]
 macro_rules! atomic_impl {
     ($($ty:ident $size:expr)*) => {
         $(
@@ -2677,7 +2677,7 @@ macro_rules! atomic_impl {
     };
 }
 
-#[cfg(all(feature = "std", not(no_std_atomic)))]
+#[cfg(not(no_atomic))]
 atomic_impl! {
     AtomicBool "8"
     AtomicI8 "8"
@@ -2690,7 +2690,7 @@ atomic_impl! {
     AtomicUsize "ptr"
 }
 
-#[cfg(all(feature = "std", not(no_std_atomic64)))]
+#[cfg(not(no_atomic64))]
 atomic_impl! {
     AtomicI64 "64"
     AtomicU64 "64"
